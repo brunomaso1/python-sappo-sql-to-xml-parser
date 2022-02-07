@@ -37,10 +37,11 @@ class Parser:
         text = fileUtils.loadFile(self.filePath)
 
         # Obtengo los campos y claves.
-        parserUtilsGetter = ParserUtilsGetters()
+        parserUtilsGetter = ParserUtilsGetters(self.tableName)
         fields = parserUtilsGetter.getFields(text)
         fieldsKeys = parserUtilsGetter.getFieldsKeys(text)
         fieldsWOKeys = parserUtilsGetter.getFieldsWOKeys()
+        parserUtilsGetter.log()
 
         # Genero los items complex type.
         dataTypes = []

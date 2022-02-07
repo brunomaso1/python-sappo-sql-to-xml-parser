@@ -9,7 +9,7 @@ class ParserUtilsGenerators:
         self.tableName = tableName
         self.softwareComponent = softwareComponent
         self.switcher = {
-            "NUMBER": ' type="xsd:float" minOccurs="0" />',
+            "NUMBER": ' type="xsd:string" minOccurs="0" />',
             "VARCHAR2": ' type="xsd:string" minOccurs="0" />',
             "DATE": """ minOccurs="0">
                 <xsd:complexType>
@@ -22,7 +22,7 @@ class ParserUtilsGenerators:
             </xsd:element>"""
         }
         self.dtName = 'DT_%s_%s_' % (self.softwareComponent, self.tableName)
-        self.nameSpace = nameSpace
+        self.nameSpace = nameSpace + self.tableName
 
     def generateItemComplexType(self, fields, _type):
         text = ''
@@ -53,7 +53,7 @@ class ParserUtilsGenerators:
         text += '<xsd:sequence>'
 
         text += '<xsd:element name="row" type="%sITEM" minOccurs="0" maxOccurs="unbounded" />' % self.dtName
-        text += '<xsd:element name="result_count" type="xsd:integer" minOccurs="0" />'
+        text += '<xsd:element name="result_count" type="xsd:string" minOccurs="0" />'
 
         text += '</xsd:sequence>'
         text += '</xsd:complexType>'
@@ -98,7 +98,7 @@ class ParserUtilsGenerators:
             text += '<xsd:element name="ACCESS" type="%sITEM" />' % self.dtName
             text += '<xsd:element name="KEY" type="%sITEM" />' % self.dtName
         elif (_type == 'INSERT'):
-            text += '<xsd:element name="ACCESS" type="%sITEM" />' % self.dtName
+            text += '<xsd:element name="ACCESS" type="%sITEM" maxOccurs="unbounded" />' % self.dtName
         elif (_type == 'UPDATE'):
             text += '<xsd:element name="ACCESS" type="%sITEM_WOKEY" />' % self.dtName
             text += '<xsd:element name="KEY" type="%sITEM_KEY" />' % self.dtName

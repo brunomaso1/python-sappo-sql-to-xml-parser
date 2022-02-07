@@ -2,11 +2,13 @@ from Parser import Parser
 import pathlib
 import os
 
-print('Software Comonent:')
-softwareComponent = input()
+print('Software Component:')
+# softwareComponent = input()
+softwareComponent = 'GIC'
 
-print('Namespace: ')
-nameSpace = input()
+print('Namespace (http://imm.gub.uy/SAP-GIC/): ')
+# nameSpace = input()
+nameSpace = 'http://imm.gub.uy/SAP-GIC/'
 
 actualPath = pathlib.Path(__file__).parent.resolve()
 inputPath = actualPath.joinpath('input')
